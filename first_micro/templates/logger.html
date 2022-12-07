@@ -1,0 +1,30 @@
+<html>
+
+    <head>
+    <!-- Google tag (gtag.js) -->
+        <script async
+        src="https://www.googletagmanager.com/gtag/js?id=G-STW104EH1L"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', ' G-STW104EH1L');
+        </script>
+    </head>
+
+    <body>
+        <h1>Logger</h1>
+            <form method="POST">
+                <input name="user_input" placeholder="Write something to print in logs" />
+                <input type="submit" />
+            </form>
+        <h2>Last logs:</h2>
+                <span style="white-space: pre-line">{{text}}</span>
+        <script>
+            console.log("This is a log from the browser");
+            console.log("{{text.split('\n')[-2]}}");
+        </script>
+    Footer
+
+    </body>
+</html>
