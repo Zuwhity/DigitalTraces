@@ -1,18 +1,17 @@
 from flask import Flask, render_template, request, url_for
-import logging
 from markupsafe import escape # to escape user inputs and so avoid injection attacks
-
+import requests
 
 app = Flask(__name__)
 
 prefix_google="""
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-250950402-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-STW104EH1L"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-250950402-1');
+        gtag('config', 'G-STW104EH1L');
     </script>
     """
 user_input=""
@@ -39,6 +38,21 @@ def logger():
         user_input+='\n'
     else:
         user_input+='\n'
+    
     return prefix_google+render_template('logger.html', text=user_input)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+@app.route('/cookie', methods = ["GET", "POST"])
+def cookie():
+    req = requests.get("https://www.google.com/")
+
+    return req.cookies.get_dict()
+
+@app.route('/GA', methods = ["GET", "POST"])
+def cookieGA():
+    req = requests.get("https://analytics.google.com/analytics/web/#/p345095181/reports/intelligenthome?params=_u..nav%3Dmaui")
+
+    return req.text
